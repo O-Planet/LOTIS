@@ -1,3 +1,5 @@
+[English](README.md) | [Русский](README.ru.md)
+
 # LOTIS — PHP Framework for Fast Business Apps
 
 "Меньше кода - больше смысла"
