@@ -31,12 +31,16 @@ $content = LTS::Div();
 // Кнопка, по которой будет прочитан с сервера файл
 $button = LTS::Button()
     ->capt('Нажми меня')
-    ->click(<<<JS LTS(events).loadreadme(); >>>);
+    ->click(
+<<<
+        LTS(events).loadreadme();
+>>>
+);
 
 // Событие, читающее файл с сервера и выводящее на клиенте в контейнер $content
 $events = LTS::Events();
 $events->client('loadreadme',
-<<<JS
+<<<
    $(content).text(result); $(button).hide();
 >>>
 );
@@ -73,7 +77,7 @@ $messages->bool('newmessage');
 $form = LTS::Form();
 $username = $form->text('name', 'Имя пользователя');
 $form->button('enter', 'Получить сообщения')->click(
-<<<JS
+<<<
     const user = LTS(username).value();
     if(! user) {
         alert('Введите имя пользователя!');
@@ -86,7 +90,7 @@ $form->button('enter', 'Получить сообщения')->click(
 // Собывтие, читающее данные из базы данных и возвращающее в таблицу 
 $events = LTS::Events();
 $events->client('getinfo(name)',
-<<<JS
+<<<
     if(result.ok)
         LTS(table).create(result.data);
     else
@@ -181,14 +185,14 @@ $maindiv->bindtodb($kassa, [
 
 // Хак на вывод строки в таблицу документов
 $maindiv->table->out(
-<<<JS
+<<<
     function (row, obj) { 
         // Если строка была отмечена
         row.find('td.Column_sel').text(obj.sel ? '✅' : '☐'); 
         // Форматируем вывод даты, отсекаем время
         row.find('td.Column_date').text(obj.date.substr(0, 10)); 
     }
-JS
+
 );
 
 // Определяем табличную часть документа
@@ -226,13 +230,13 @@ $userfield->fieldmap(['id' => 'user', 'name' => 'name']);
 
 // Хак на вывод строки в табличную часть
 $subtable->table->out(
-<<<JS
+<<<
 function (row, obj) {
     row.find('td.Column_sel').text(obj.sel ? '✅' : '☐'); 
     row.find('td.Column_del').html('<input type="button" class="ltsRowDelbutton" value="x">');
 } 
-JS)
-;
+JS
+);
 
 // Проверки перед окончанием редактирования строки
 $subtable->method('checkrowsave(values)',
