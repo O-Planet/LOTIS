@@ -33,8 +33,8 @@ include_once 'newlotis/lotis.php';
 $div = LTS::Div('main')
     ->columnbox();
 $div->capt("Привет из LOTIS!")
-  ->CSS()->add('width', '100%')
-    ->add('height', '100vh');
+    ->width('100%')
+    ->height('100vh');
 LTS::Space()->build($div);
 ```
 
