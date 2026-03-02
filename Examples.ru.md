@@ -1,3 +1,7 @@
+[English](Examples.md) | [Русский](Examples.ru.md)
+
+🚀 [Быстрый старт за 5 минут](QuickStart.ru.md) 
+
 # LOTIS: Примеры кода
 
 ## Пример 1: Чтение файла и вывод в блок
