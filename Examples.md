@@ -21,19 +21,19 @@ $button = LTS::Button()
     ->capt('Click me')
     ->click(
 <<<JS
-        LTS(events).loadreadme('readme.md');
+        LTS(events).loadfile('readme.md');
 JS
 );
 
 // Event: reads file from server and displays it in $content container on client
 $events = LTS::Events();
-$events->client('loadreadme(name)',
+$events->client('loadfile(name)',
 <<<JS
     $(content).text(result);
     $(button).hide();
 JS
 );
-$events->server('loadreadme', function ($args) {
+$events->server('loadfile', function ($args) {
     $filename = $args['name'];
     if(file_exists($filename)
         return file_get_contents($filename);
