@@ -414,16 +414,16 @@ LTS(form).clear();      // clear form
 Created automatically by filename:
 
 ```php
-$lang = LTS::Lang('ru');
-echo $lang->say('Hello'); // → Привет, if translation exists
+$lang = LTS::Lang('de');
+echo $lang->say('Welcome'); // → Hallo!, if translation exists
 ```
 
-File: `index.ru`
+File: `index.de`
 
 ```
-welcome: Welcome
-description: This is a programming website
-footer: © All rights reserved
+Welcome: Hallo!
+description: Das ist Website-Programmierung
+All rights reserved: Alle Rechte vorbehalten
 ```
 
 ---
