@@ -21,18 +21,24 @@ $button = LTS::Button()
     ->capt('Нажми меня')
     ->click(
 <<<JS
-        LTS(events).loadreadme();
+        LTS(events).loadfile('readme.md');
 JS
 );
 
 // Событие, читающее файл с сервера и выводящее на клиенте в контейнер $content
 $events = LTS::Events();
-$events->client('loadreadme',
+$events->client('loadfile(name)',
 <<<JS
-   $(content).text(result); $(button).hide();
+    $(content).text(result);
+    $(button).hide();
 JS
 );
-$events->server('loadreadme', function ($args) { return file_get_contents('readme.md'); });
+$events->server('loadfile', function ($args) {
+    $filename = $args['name'];
+    if(file_exists($filename)
+        return file_get_contents($filename);
+    return 'File not found!';
+});
 
 // Подключаем стили Из файла index.css
 $maindiv->CSS()->add('index.css');
