@@ -10,70 +10,57 @@ mkdir newlotis && cd newlotis
 # Точка входа — файл lotis.php
 ```
 
----
-
 ## Архитектура
 
-```
-src/
-└── newlotis/
-    ├── [lotis.php](docs/lotis.ru.md)                      # Точка входа
-    ├── LTS/                                               # Ядро
-    │   ├── [DataView.php](docs/DataView.ru.md)            # Главная форма
-    │   ├── [DataTable.php](docs/DataTable.ru.md)          # Таблицы с сортировкой и отбором
-    │   ├── [FilterForm.php](docs/FilterForm.ru.md)        # Форма фильтрации таблиц
-    │   ├── [Stock.php](docs/Stock.ru.md)                  # Централизованный учёт
-    │   ├── [Space.php](docs/Space.ru.md)                  # Сборка UI
-    │   ├── [Events.php](docs/Events.ru.md)                # События через AJAX
-    │   ├── [Form.php](docs/Form.ru.md)                    # Форма ввода: базовый контейнер для полей
-    │   ├── [Input.php](docs/Input.ru.md)                  # Поле ввода текста
-    │   ├── [LookupField.php](docs/LookupField.ru.md)      # Поле поиска с выпадающим списком и автоподгрузкой
-    │   ├── [JS.php](docs/JS.ru.md)                        # Генерация JavaScript-логики на стороне PHP
-    │   ├── [CSS.php](docs/CSS.ru.md)                      # Вставка и управление CSS-правилами на лету
-    │   ├── [Div.php](docs/Div.ru.md)                      # Универсальный контейнер
-    │   ├── [Vars.php](docs/Vars.ru.md)                    # Система глобальных переменных
-    │   ├── [Grid.php](docs/Grid.ru.md)                    # Сеточная вёрстка (таблицоподобная)
-    │   ├── [Dialog.php](docs/Dialog.ru.md)                # Модальное окно (popup) для подтверждений и форм
-    │   ├── [MySql.php](docs/MySql.ru.md)                  # Подключение к MySQL
-    │   ├── [MySqlField.php](docs/MySqlField.ru.md)        # Представление поля таблицы
-    │   ├── [MySqlTable.php](docs/MySqlTable.ru.md)        # Работа с таблицей: select, insert, update, delete
-    │   ├── [QueryBuilder.php](docs/QueryBuilder.ru.md)    # Построитель SQL-запросов
-    │   ├── [Button.php](docs/Button.ru.md)                # Кнопка с действиями: отправка, сигнал, открытие формы
-    │   ├── [Cells.php](docs/Cells.ru.md)                  # Сетка элементов: раскладка по строкам и столбцам
-    │   ├── [Columns.php](docs/Columns.ru.md)              # Гибкая колоночная вёрстка (аналог grid CSS)
-    │   ├── [Accordion.php](docs/Accordion.ru.md)          # Раскрывающиеся блоки для группировки форм
-    │   ├── [Construct.php](docs/Construct.ru.md)          # Динамическое создание UI-структур
-    │   ├── [DataSync.php](docs/DataSync.ru.md)            # Синхронизация данных между клиентом и сервером
-    │   ├── [Debug.php](docs/Debug.ru.md)                  # Инструменты отладки: логирование, вывод переменных
-    │   ├── [Element.php](docs/Element.ru.md)              # Базовый класс всех UI-элементов
-    │   ├── [Ether.php](docs/Ether.ru.md)                  # Система широковещательных сообщений (pub/sub)
-    │   ├── [Html.php](docs/Html.ru.md)                    # Работа с HTML-тегами: label, span, div и др.
-    │   ├── [Lang.php](docs/Lang.ru.md)                    # Поддержка мультиязычности
-    │   ├── [LayerSlider.php](docs/LayerSlider.ru.md)      # Переключение слоёв интерфейса (пошаговые формы)
-    │   ├── [Logger.php](docs/Logger.ru.md)                # Логирование действий и ошибок
-    │   ├── [ProgressBar.php](docs/ProgressBar.ru.md)      # Визуальный прогресс выполнения задачи
-    │   ├── [Quark.php](docs/Quark.ru.md)                  # Мини-реализация объектной модели: события, подписки, вызовы
-    │   ├── [Select.php](docs/Select.ru.md)                # Выпадающий список
-    │   ├── [SimpleChart.php](docs/SimpleChart.ru.md)      # Простые графики: bar, line, pie
-    │   ├── [Span.php](docs/Span.ru.md)                    # Inline-контейнер
-    │   ├── [Tabs.php](docs/Tabs.ru.md)                    # Вкладки для переключения между разделами
-    │   └── [Video.php](docs/Video.ru.md)                  # Встраивание видео (локального или из сети)
-    ├── JS/                                                # Клиентская часть
-    │   ├── [lts.js](docs/lts.js.ru.md)                    # Клиентское ядро
-    │   ├── Form.js                  
-    │   ├── Events.js              
-    │   ├── DataTable.js        
-    │   └── ...          
-    ├── CSS/                                               # Предопределенные стили
-    │   ├── FilterForm.css
-    │   ├── LookupField.css
-    │   └── ...
-    └── examples/                                          # Примеры проектов
-        ├── tracker.zip
-        ├── testgrid.zip
-        └── ...
-```
-
+- `src/`
+  - `newlotis/`
+    - [`lotis.php`](docs/lotis.ru.md) — Точка входа
+    - `LTS/` — Ядро
+      - [`DataView.php`](docs/DataView.ru.md) — Главная форма
+      - [`DataTable.php`](docs/DataTable.ru.md) — Таблицы с сортировкой и отбором
+      - [`FilterForm.php`](docs/FilterForm.ru.md) — Форма фильтрации таблиц
+      - [`Stock.php`](docs/Stock.ru.md) — Централизованный учёт
+      - [`Space.php`](docs/Space.ru.md) — Сборка UI
+      - [`Events.php`](docs/Events.ru.md) — События через AJAX
+      - [`Form.php`](docs/Form.ru.md) — Форма ввода: базовый контейнер для полей
+      - [`Input.php`](docs/Input.ru.md) — Поле ввода текста
+      - [`LookupField.php`](docs/LookupField.ru.md) — Поле поиска с выпадающим списком
+      - [`JS.php`](docs/JS.ru.md) — Генерация JavaScript-логики на стороне PHP
+      - [`CSS.php`](docs/CSS.ru.md) — Вставка и управление CSS-правилами на лету
+      - [`Div.php`](docs/Div.ru.md) — Универсальный контейнер
+      - [`Vars.php`](docs/Vars.ru.md) — Система глобальных переменных
+      - [`Grid.php`](docs/Grid.ru.md) — Сеточная вёрстка
+      - [`Dialog.php`](docs/Dialog.ru.md) — Модальное окно
+      - [`MySql.php`](docs/MySql.ru.md) — Подключение к MySQL
+      - [`MySqlField.php`](docs/MySqlField.ru.md) — Представление поля таблицы
+      - [`MySqlTable.php`](docs/MySqlTable.ru.md) — Работа с таблицей
+      - [`QueryBuilder.php`](docs/QueryBuilder.ru.md) — Построитель SQL-запросов
+      - [`Button.php`](docs/Button.ru.md) — Кнопка с действиями
+      - [`Cells.php`](docs/Cells.ru.md) — Сетка элементов
+      - [`Columns.php`](docs/Columns.ru.md) — Гибкая колоночная вёрстка
+      - [`Accordion.php`](docs/Accordion.ru.md) — Раскрывающиеся блоки
+      - [`Construct.php`](docs/Construct.ru.md) — Динамическое создание UI-структур
+      - [`DataSync.php`](docs/DataSync.ru.md) — Синхронизация данных
+      - [`Debug.php`](docs/Debug.ru.md) — Инструменты отладки
+      - [`Element.php`](docs/Element.ru.md) — Базовый класс всех UI-элементов
+      - [`Ether.php`](docs/Ether.ru.md) — Система широковещательных сообщений
+      - [`Html.php`](docs/Html.ru.md) — Работа с HTML-тегами
+      - [`Lang.php`](docs/Lang.ru.md) — Поддержка мультиязычности
+      - [`LayerSlider.php`](docs/LayerSlider.ru.md) — Переключение слоёв интерфейса
+      - [`Logger.php`](docs/Logger.ru.md) — Логирование действий и ошибок
+      - [`ProgressBar.php`](docs/ProgressBar.ru.md) — Визуальный прогресс
+      - [`Quark.php`](docs/Quark.ru.md) — Мини-реализация объектной модели
+      - [`Select.php`](docs/Select.ru.md) — Выпадающий список
+      - [`SimpleChart.php`](docs/SimpleChart.ru.md) — Простые графики
+      - [`Span.php`](docs/Span.ru.md) — Inline-контейнер
+      - [`Tabs.php`](docs/Tabs.ru.md) — Вкладки
+      - [`Video.php`](docs/Video.ru.md) — Встраивание видео
+    - `JS/` — Клиентская часть
+      - [`lts.js`](docs/lts.js.ru.md) — Клиентское ядро
+      - `Form.js`, `Events.js`, `DataTable.js`...
+    - `CSS/` — Предопределенные стили
+    - `examples/` — Примеры проектов
+    
 ## Объектно-ориентированный подход
 
 LOTIS строит веб-приложения по классическим принципам ООП. Фреймворк предоставляет три типа объектов:
