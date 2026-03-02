@@ -1,4 +1,4 @@
-🚀 [Быстрый старт](QuickStart.ru.md) 
+🚀 [Быстрый старт](../QuickStart.ru.md)
 
 # Клиентское ядро (lts.js)
 
