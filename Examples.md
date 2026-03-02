@@ -20,17 +20,17 @@ $content = LTS::Div();
 $button = LTS::Button()
     ->capt('Click me')
     ->click(
-<<<
+<<<JS
         LTS(events).loadreadme();
->>>
+JS
 );
 
 // Event: reads file from server and displays it in $content container on client
 $events = LTS::Events();
 $events->client('loadreadme',
-<<<
+<<<JS
    $(content).text(result); $(button).hide();
->>>
+JS
 );
 $events->server('loadreadme', function ($args) { return file_get_contents('readme.md'); });
 
@@ -65,25 +65,25 @@ $messages->bool('newmessage');
 $form = LTS::Form();
 $username = $form->text('name', 'Username');
 $form->button('enter', 'Get messages')->click(
-<<<
+<<<JS
     const user = LTS(username).value();
     if(! user) {
         alert('Please enter username!');
         return;
     } 
     LTS(events).getinfo(user); 
->>>
+JS
 );
 
 // Event: reads data from database and returns it to table
 $events = LTS::Events();
 $events->client('getinfo(name)',
-<<<
+<<<JS
     if(result.ok)
         LTS(table).create(result.data);
     else
         alert(result.error);
->>>
+JS
 );
 $events->server('getinfo', function ($args) {
     global $messages;
@@ -173,14 +173,14 @@ $maindiv->bindtodb($kassa, [
 
 // Custom row rendering for document table
 $maindiv->table->out(
-<<<
+<<<JS
     function (row, obj) { 
         // If row is selected
         row.find('td.Column_sel').text(obj.sel ? '✅' : '☐'); 
         // Format date display, remove time
         row.find('td.Column_date').text(obj.date.substr(0, 10)); 
     }
-
+JS
 );
 
 // Define document line items (subtable)
@@ -218,7 +218,7 @@ $userfield->fieldmap(['id' => 'user', 'name' => 'name']);
 
 // Custom row rendering for line items
 $subtable->table->out(
-<<<
+<<<JS
 function (row, obj) {
     row.find('td.Column_sel').text(obj.sel ? '✅' : '☐'); 
     row.find('td.Column_del').html('<input type="button" class="ltsRowDelbutton" value="x">');
@@ -228,7 +228,7 @@ JS
 
 // Validation before saving line item
 $subtable->method('checkrowsave(values)',
-<<<
+<<<JS
     if(! LTS(userfield).selected) {
         alert('Employee not selected!');
         return false;
@@ -239,7 +239,7 @@ $subtable->method('checkrowsave(values)',
     }
     values.name = LTS(userfield).selected.name; 
     return true;
->>>
+JS
 );
 
 // Update data stocks on document save
