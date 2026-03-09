@@ -71,12 +71,12 @@ $myaccordion->collaps()
     ->active(1)
     ->heightstyle('auto');
 
-// Хук на предопределенный клиентский метод смены секции
+// Хук на предопределенный клиентский метод смены панелей
 $myaccordion->openhucks('open');
 $myaccordion->js()->add(
 <<<JS
     LTS(myaccordion).onopen = function (numb) {
-        console.log('Открыта секция ' + numb);
+        console.log('Открыта панель №' + numb);
     };
 JS
 );
@@ -101,6 +101,7 @@ JS
 *   Класс не реализует анимации открытия/закрытия — используются стандартные анимации jQuery UI.
 *   Аккордеон может содержать любые дочерние элементы — `Div`, `Form`, `Input`, `DataTable` и др.
 *   При компиляции секции с пустым `$caption` — заголовок создаётся пустым.
+
 
 
 
