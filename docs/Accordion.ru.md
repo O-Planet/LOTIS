@@ -56,15 +56,15 @@
 
 ```php
 // Создание аккордеона
-$accordion = new Accordion('myAccordion');
+$accordion = LTS::Accordion('myAccordion');
 
 // Добавление секций
 $section1 = $accordion->newsection('Секция 1');
 $section2 = $accordion->newsection('Секция 2');
 
 // Добавление контента
-$section1->add(new Text('Содержимое первой секции'));
-$section2->add(new Text('Содержимое второй секции'));
+$section1->add(LTS::Div()->capt('Содержимое первой секции'));
+$section2->add(LTS::Div()->capt('Содержимое второй секции'));
 
 // Настройка параметров
 $accordion->collaps()
@@ -91,4 +91,5 @@ $accordion->collaps()
 *   Класс не реализует анимации открытия/закрытия — используются стандартные анимации jQuery UI.
 *   Аккордеон может содержать любые дочерние элементы — `Div`, `Form`, `Input`, `DataTable` и др.
 *   При компиляции секции с пустым `$caption` — заголовок создаётся пустым.
+
 
