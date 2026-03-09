@@ -70,6 +70,14 @@ $section2->add(LTS::Div()->capt('Содержимое второй секции'
 $accordion->collaps()
     ->active(1)
     ->heightstyle('auto');
+
+// Хук на предопределенный клиентский метод смены секции
+$accordion->openhucks('open');
+$accordion->method('onopen(numb)',
+<<<JS
+    console.log('Открыта секция ' + numb);
+JS
+);
 ```
 
 ## Примечания
@@ -91,5 +99,6 @@ $accordion->collaps()
 *   Класс не реализует анимации открытия/закрытия — используются стандартные анимации jQuery UI.
 *   Аккордеон может содержать любые дочерние элементы — `Div`, `Form`, `Input`, `DataTable` и др.
 *   При компиляции секции с пустым `$caption` — заголовок создаётся пустым.
+
 
 
