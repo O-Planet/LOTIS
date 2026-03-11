@@ -1,7 +1,3 @@
-Here is the complete English translation, preserving the exact structure and formatting:
-
----
-
 [English](DataTable.md) | [Русский](DataTable.ru.md)
 
 🚀 [Quick Start](../QuickStart.md)
