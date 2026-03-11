@@ -1,3 +1,5 @@
+[English](DataSync.md) | [Русский](DataSync.ru.md)
+
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
 # Класс DataSync
@@ -187,4 +189,5 @@ JS
 *   **Observer опции:** При указании `$wrapper` — передаётся в `IntersectionObserver` как `root` опция.
 *   **Хранение:** `$vars->store()` вызывается после каждого `upload()` — состояние сохраняется в сессию.
 *   **Восстановление:** При загрузке страницы — `$vars->restore()` — восстанавливает `begin`, `next`, `recid` из сессии.
+
 
