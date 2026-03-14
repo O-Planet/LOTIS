@@ -1,3 +1,5 @@
+[English](Element.md) | [Русский](Element.ru.md)
+
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
 # Класс Element
