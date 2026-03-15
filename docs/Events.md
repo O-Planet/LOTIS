@@ -112,9 +112,9 @@ $events->client('calculate(a, b)', function(result) {
 // Registering a client hook
 $events->method('checkcalculate(a, b)',
 <<<JS
-    if(a < 0 || b < 0)
+    if(typeof a != 'number' || typeof b != 'number')
     {
-        alert('Enter positive numbers!');
+        alert('Enter numbers!');
         return false;  
     }
     return true;
