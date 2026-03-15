@@ -112,9 +112,9 @@ $events->client('calculate(a, b)', function(result) {
 // Регистрация клиентского хака
 $events->method('checkcalculate(a, b)',
 <<<JS
-    if(a < 0 || b < 0)
+    if(typeof a != 'number' || typeof b != 'number')
     {
-        alert('Введите положительные числа!');
+        alert('Введите числа!');
         return false;  
     }
     return true;
