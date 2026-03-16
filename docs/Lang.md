@@ -99,7 +99,7 @@ long:Dies ist ein sehr langer Satz, daher verwenden wir einen Schlüssel.
 Usage on the server
 ```php
 // Creating a language object
-$lang = new Lang('de');
+$lang = LTS::Lang('de');
 
 // Getting a translation
 echo $lang->say('Hello, world!'); // Outputs: Hallo Welt!
