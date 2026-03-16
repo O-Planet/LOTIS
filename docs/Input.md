@@ -1,7 +1,3 @@
- Here is the complete English translation, preserving the exact structure and formatting:
-
----
-
 [English](Input.md) | [Русский](Input.ru.md)
 
 🚀 [Quick Start](../QuickStart.md)
