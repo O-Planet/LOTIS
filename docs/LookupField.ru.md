@@ -1,3 +1,5 @@
+[English](LookupField.md) | [Русский](LookupField.ru.md)
+
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
 # Класс LookupField
@@ -120,6 +122,34 @@
 | **`.lookup-field`** | Базовый класс компонента — добавляется автоматически в конструкторе. |
 | **`.lookup-dropdown`** | Класс выпадающего блока — добавляется `$dropdown`. По умолчанию `display: none`. |
 | **`.filterfield`** | Класс для поля фильтрации — добавляется `$input` если компонент имеет класс `filterfield`. |
+
+### Примеры использования
+
+```php
+// Подключение базы данных
+$base = LTS::MySql('tracking', 'localhost', 'root', 'root');
+$works = $base->table('works');
+$works->string('name', 100);
+$works->float('price');
+
+// Создание поле поиска
+$workLookup = LTS::LookupField();
+
+// Привязка к таблице базы данных, определение колонок в таблице поиска  
+$workLookup->dbtable($works)->head(['name' => 'Работа']);
+
+// Обработка выбора значения через сигнал
+$page = LTS::Div();
+$page->signal('Selected', 
+<<<JS
+    function() {
+        const selected = LTS(workLookup).selected;
+        if (selected) 
+            alert('Выбрано: ' + selected.name + ' — ' + selected.price + ' ₽');
+    }
+JS
+, $workLookup);
+```
 
 ## Примечания
 *   Класс расширяет `Div`, поэтому наследует все методы Flexbox (`flex()`, `row()`, `column()`, `content()`, `align()`, `gap()` и др.), управления потомками (`add()`, `del()`, `getchilds()`, `move()`) и стилизации (`css()`, `width()`, `height()`).
