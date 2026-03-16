@@ -129,6 +129,82 @@
 | **LTS(grid).before(f)** | `function $f` | `this` | Регистрирует хук предобработки перед сменой режима. `$f` — JavaScript-функция, может модифицировать данные режима. Возвращаемое значение используется для применения. Поддерживает цепочечные вызовы. |
 | **LTS(grid).on(f)** | `function $f` | `this` | Регистрирует хук постобработки после смены режима. `$f` — JavaScript-функция, вызывается после применения конфигурации. Может использоваться для дополнительной инициализации. Поддерживает цепочечные вызовы. |
 
+## Примеры использования
+
+```php
+// Создание Grid
+$grid = LTS::Grid();
+
+// Определяем дополнительное устройство
+$grid->deviceQuery('watch', '() => window.innerWidth <= 600 && window.innerHeight <= 600');
+
+// Опрелеление режима dashboard
+$grid->setMode('dashboard')
+     ->device('desktop')
+        ->areas(["header header",
+            "menu content",
+            "bar bar"])
+        ->rows("60px 1fr auto")
+        ->columns("200px 1fr")
+     ->device('mobile')
+        ->areas(["header", "content", "bar"])
+        ->rows("60px 1fr auto")
+        ->columns("1fr")
+     ->device('watch')
+        ->areas(["header", "content"])
+        ->rows("50px 1fr")
+        ->columns("1fr");
+
+// Определение режима editor
+$grid->setMode('editor')
+     ->device('desktop')
+        ->areas(["header header",
+            "form form",
+            "actions actions"])
+        ->rows("60px 1fr auto")
+        ->columns("1fr")
+     ->device('mobile')
+        ->areas(["header", "form", "actions"])
+        ->rows("60px 1fr auto")
+        ->columns("1fr")
+     ->device('watch')
+        ->areas(["header", "form"])
+        ->rows("50px 1fr")
+        ->columns("1fr");
+
+// Приоритеты режимов и режим по умолчанию
+$grid->defaultmode('dashboard')
+    ->priority('watch,mobile,desktop');
+
+// Врапперы для областей
+$header = $grid->area('header')->capt('🌐 Демо Grid')->addclass('header');
+$menu = $grid->area('menu')
+    ->add(LTS::Div()->addclass('menu-item')->capt('🏠 Главная'))
+    ->add(LTS::Div()->addclass('menu-item')->capt('📊 Отчеты'))
+    ->add(LTS::Div()->addclass('menu-item')->capt('⚙️ Настройки'));
+$content = $grid->area('content')->capt('Контент загружается...')->addclass('content');
+$bar = $grid->area('bar')->capt('Готов к работе')->addclass('status-bar');
+$form = $grid->area('form')->capt('Форма редактирования')->addclass('form'); 
+$actions = $grid->area('actions')->capt('Кнопки действий')->addclass('actions'); 
+
+// --- Кнопки управления ---
+$btnDashboard = LTS::Button()
+    ->capt('📊 Панель')
+    ->click(
+<<<JS
+    LTS(grid).mode('dashboard')
+JS
+);
+
+$btnEditor = LTS::Button()
+    ->capt('✏️ Редактор')
+    ->click(
+<<<JS
+    LTS(grid).mode('editor')
+JS
+);
+```
+
 ## Примечания
 *   Класс расширяет `Div`, поэтому наследует все методы Flexbox (`flex()`, `row()`, `column()`, `content()`, `align()`, `gap()` и др.), управления потомками (`add()`, `del()`, `getchilds()`, `move()`) и стилизации (`css()`, `width()`, `height()`).
 *   Класс расширяет `Element`, `Quark`, `Construct`, поэтому поддерживает полный жизненный цикл объектов: `compile()`, `shine()`, `childs()`, `addinspace()`, а также хуки (`$check`, `$before`, `$on` и др.).
