@@ -142,9 +142,11 @@ $myform = LTS::Form();
 $myform->text('username', 'Логин')
      ->password('password', 'Пароль')
      ->email('email', 'Email');
+
 // Добавление кнопок
 $myform->button('close', 'Закрыть')->click('$(myform).hide()');
 $clickbutton = $myform->button('clickme', 'Нажми меня');
+
 // Привязка события к кнопке
 $myform->event($clickbutton,
 <<<JS
@@ -154,6 +156,7 @@ JS
   ->event($clickbutton, function($values) {
     return 'Привет, ' . $args['username'];
 });
+
 // Назначение хаков
 $myform->js()->add(
 <<<JS
@@ -174,6 +177,50 @@ $myform->cells([
     'email',
     'clickme, close'
 ]);
+```
+
+Можно генерировать форму из массива описания:
+
+```php
+// Создание формы
+$myform = LTS::Form();
+// Массив описаний полей формы 
+$inputs = [
+        ['name' => 'works', 'type' => 'table', 'dbtable' => $works, 'caption' => 'Работы'],
+        ['name' => 'quantity', 'type' => 'numeric', 'caption' => 'Количество'],
+        ['name' => 'ltsDataId', 'type' => 'hidden'],
+        ['name' => 'save', 'type' => 'button', 'caption' => 'Ок'],
+        ['name' => 'close', 'type' => 'button', 'caption' => 'Отмена']
+    ];
+
+// Генерация формы
+$myform->generate($inputs);
+
+// Определения для LookupField
+$worksfield = $myform->field('works');
+$worksfield->head(['name' => 'Наименование'])
+    ->fieldmap(['id' => 'works', 'name' => 'name']);
+
+// Обработчик нажатия на кнопку
+$myforms->field('close')->click(
+<<<JS
+     $(myform).hide();
+JS
+);
+
+// Привязка события к кнопке
+$myform->event('save',
+<<<JS
+     if(result.result)
+          alert(result.data);
+     else
+          alert('Не удалось сохранить данные!');
+JS
+  )
+  ->event('save', function($values) {
+     // Код, сохраняющий данные
+     return { 'result' => true, 'data' => 'Данные сохранены'};
+});
 ```
 
 ## Примечания
