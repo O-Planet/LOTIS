@@ -1,3 +1,5 @@
+[English](lts.js.md) | [Русский](lts.js.ru.md)
+
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
 # Клиентское ядро (lts.js)
