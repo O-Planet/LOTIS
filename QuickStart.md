@@ -17,7 +17,7 @@ mkdir newlotis && cd newlotis
 - `src/`
   - `lotis.php` — [`lotis.php`](docs/lotis.md) — Entry point
   - `LTS/` — Core
-    - [`DataView.php`](docs/DataView.md) — Main form
+    - [`DataView.php`](docs/DataView.md) — Main form: unified interface for working with "header + line items" documents
     - [`DataTable.php`](docs/DataTable.md) — Tables with sorting and filtering
     - [`FilterForm.php`](docs/FilterForm.md) — Table filter form
     - [`Stock.php`](docs/Stock.md) — Centralized accounting
@@ -36,7 +36,7 @@ mkdir newlotis && cd newlotis
     - [`MySqlField.php`](docs/MySqlField.md) — Table field representation
     - [`MySqlTable.php`](docs/MultiTable.md) — Table operations: select, insert, update, delete
     - [`QueryBuilder.php`](docs/QueryBuilder.md) — SQL query builder
-    - [`MultiTable.php`](docs/MySql.md) — Unified interface for working with "header + line items" documents
+    - [`MultiTable.php`](docs/MySql.md) — Binding child tables to the parent table
     - [`Button.php`](docs/Button.md) — Button with actions: submit, signal, open form
     - [`Cells.php`](docs/Cells.md) — Element grid: row and column layout
     - [`Columns.php`](docs/Columns.md) — Flexible column layout (CSS grid analog)
