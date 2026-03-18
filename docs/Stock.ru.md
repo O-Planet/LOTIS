@@ -1,3 +1,5 @@
+[English](Stock.md) | [Русский](Stock.ru.md)
+
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
 # Класс Stock
@@ -58,15 +60,15 @@ $stock->collector(
     'product_id',       // поле для связи
     [                   // поля, которые будут увеличиваться/уменьшаться
         'quantity',
-        'total_amount' => 'total'
+        'amount' => 'total'
     ],
     true               // флаг увеличения
 );
 
 // Обновление данных
 $stock->update(
-    ['type_doc' => 'incoming', 'id' => 123],  // ключи для поиска
-    [                  // синхронизируемые строки
+    ['type_doc' => 'incoming', 'parent_docid' => 123],  // ключи для поиска созданных ранее записей
+    [                  // новые актуальные данные, по которым будет переписан сток и обновлены коллекторы
         ['product_id' => 1, 'quantity' => 10, 'total' => 1000],
         ['product_id' => 2, 'quantity' => 5, 'total' => 850]
     ]
@@ -75,7 +77,17 @@ $stock->update(
 В этом примере предполагается следующая структура таблиц данных:
 
 ```php
+$goodsTable
+    ->string('name', 100)
+    ->float('quantity')
+    ->float('amout');
 
+$stockTable
+    ->enum('type_doc', ['incoming' => 'Приходный документ', ...])
+    ->int('parent_docid')
+    ->table('goods', $goodsTable)
+    ->float('quantity')
+    ->float('total');
 ```
 
 ## Примечания
