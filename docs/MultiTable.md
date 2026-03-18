@@ -2,6 +2,8 @@
 
 🚀 [Quick Start](../QuickStart.md)
 
+[LOTIS ORM Usage Examples](ORMExamples.md)
+
 # MultiTable Class
 
 ## Purpose
