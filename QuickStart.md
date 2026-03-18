@@ -1,6 +1,6 @@
 [English](QuickStart.md) | [Русский](QuickStart.ru.md)
 
-[Read me](ReadMe.md) 
+[Read me](README.md) 
 
 # LOTIS Framework: Quick Start
 
