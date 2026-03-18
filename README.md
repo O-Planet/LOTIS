@@ -89,7 +89,7 @@ LTS::Space()->build($div);
    });
    $loginform->event('login',
    <<<JS
-       if(result) alert('Hello!'); 
+       if(result) alert('Hello!'); else console.log('Go to ...');
    JS
    );
    ```
