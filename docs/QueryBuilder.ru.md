@@ -2,6 +2,8 @@
 
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
+[Примеры использования LOTIS ORM](ORMExamples.ru.md)
+
 # Класс QueryBuilder
 
 ## Назначение
