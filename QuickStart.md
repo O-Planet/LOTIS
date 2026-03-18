@@ -14,63 +14,54 @@ mkdir newlotis && cd newlotis
 
 ## Architecture
 
-```
-src/
-├── lotis.php            # Entry point
-├── LTS/                 # Core
-│   ├── DataView.php     # Main form
-│   ├── DataTable.php    # Tables with sorting and filtering
-│   ├── FilterForm.php   # Table filter form
-│   ├── Stock.php        # Centralized accounting
-│   ├── Space.php        # UI assembly
-│   ├── Events.php       # Events via AJAX
-│   ├── Form.php         # Input form: base container for fields
-│   ├── Input.php        # Text input field
-│   ├── LookupField.php  # Search field with dropdown and autocomplete
-│   ├── JS.php           # JavaScript logic generation on PHP side
-│   ├── CSS.php          # Dynamic CSS rules management
-│   ├── Div.php          # Universal container
-│   ├── Vars.php         # Global variables system
-│   ├── Grid.php         # Grid layout (table-like)
-│   ├── Dialog.php       # Modal window (popup) for confirmations and forms
-│   ├── MySql.php        # MySQL connection
-│   ├── MySqlField.php   # Table field representation
-│   ├── MySqlTable.php   # Table operations: select, insert, update, delete
-│   ├── QueryBuilder.php # SQL query builder
-│   ├── Button.php       # Button with actions: submit, signal, open form
-│   ├── Cells.php        # Element grid: row and column layout
-│   ├── Columns.php      # Flexible column layout (CSS grid analog)
-│   ├── Accordion.php    # Expandable blocks for form grouping
-│   ├── Construct.php    # Dynamic UI structure creation
-│   ├── DataSync.php     # Client-server data synchronization
-│   ├── Debug.php        # Debug tools: logging, variable output
-│   ├── Element.php      # Base class for all UI elements
-│   ├── Ether.php        # Broadcast messaging system (pub/sub)
-│   ├── Html.php         # HTML tag handling: label, span, div, etc.
-│   ├── Lang.php         # Multi-language support
-│   ├── LayerSlider.php  # Interface layer switching (step-by-step forms)
-│   ├── Logger.php       # Action and error logging
-│   ├── ProgressBar.php  # Visual task progress indicator
-│   ├── Quark.php        # Mini object model: events, subscriptions, calls
-│   ├── Select.php       # Dropdown list
-│   ├── SimpleChart.php  # Simple charts: bar, line, pie
-│   ├── Span.php         # Inline container
-│   ├── Tabs.php         # Tabs for section switching
-│   └── Video.php        # Video embedding (local or web)
-├── JS/                  # Client-side part
-│   ├── lts.js           
-│   ├── Form.js          
-│   ├── Events.js        
-│   └── ...           
-├── CSS/                 # Predefined styles
-│   ├── FilterForm.css
-│   ├── LookupField.css          
-│   └── ...           
-└── examples/            # Project examples
-    ├── tracker.zip      
-    ├── testgrid.zip      
-    └── ...      
-```
+- `src/`
+  - `lotis.php` — [`lotis.php`](docs/lotis.md) — Entry point
+  - `LTS/` — Core
+    - [`DataView.php`](docs/DataView.md) — Main form
+    - [`DataTable.php`](docs/DataTable.md) — Tables with sorting and filtering
+    - [`FilterForm.php`](docs/FilterForm.md) — Table filter form
+    - [`Stock.php`](docs/Stock.md) — Centralized accounting
+    - [`Space.php`](docs/Space.md) — UI assembly
+    - [`Events.php`](docs/Events.md) — Events via AJAX
+    - [`Form.php`](docs/Form.md) — Input form: base container for fields
+    - [`Input.php`](docs/Input.md) — Text input field
+    - [`LookupField.php`](docs/LookupField.md) — Search field with dropdown and autocomplete
+    - [`JS.php`](docs/JS.md) — JavaScript logic generation on PHP side
+    - [`CSS.php`](docs/CSS.md) — Dynamic CSS rules management
+    - [`Div.php`](docs/Div.md) — Universal container
+    - [`Vars.php`](docs/Vars.md) — Global variables system
+    - [`Grid.php`](docs/Grid.md) — Grid layout (table-like)
+    - [`Dialog.php`](docs/Dialog.md) — Modal window (popup) for confirmations and forms
+    - [`MySql.php`](docs/MySql.md) — MySQL connection
+    - [`MySqlField.php`](docs/MySqlField.md) — Table field representation
+    - [`MySqlTable.php`](docs/MultiTable.md) — Table operations: select, insert, update, delete
+    - [`QueryBuilder.php`](docs/QueryBuilder.md) — SQL query builder
+    - [`MultiTable.php`](docs/MySql.md) — Unified interface for working with "header + line items" documents
+    - [`Button.php`](docs/Button.md) — Button with actions: submit, signal, open form
+    - [`Cells.php`](docs/Cells.md) — Element grid: row and column layout
+    - [`Columns.php`](docs/Columns.md) — Flexible column layout (CSS grid analog)
+    - [`Accordion.php`](docs/Accordion.md) — Expandable blocks for form grouping
+    - [`Construct.php`](docs/Construct.md) — Dynamic UI structure creation
+    - [`DataSync.php`](docs/DataSync.md) — Client-server data synchronization
+    - [`Debug.php`](docs/Debug.md) — Debug tools: logging, variable output
+    - [`Element.php`](docs/Element.md) — Base class for all UI elements
+    - [`Ether.php`](docs/Ether.md) — Broadcast messaging system (pub/sub)
+    - [`Html.php`](docs/Html.md) — HTML tag handling: label, span, div, etc.
+    - [`Lang.php`](docs/Lang.md) — Multi-language support
+    - [`LayerSlider.php`](docs/LayerSlider.md) — Interface layer switching (step-by-step forms)
+    - [`Logger.php`](docs/Logger.md) — Action and error logging
+    - [`ProgressBar.php`](docs/ProgressBar.md) — Visual task progress indicator
+    - [`Quark.php`](docs/Quark.md) — Mini object model: events, subscriptions, calls
+    - [`Select.php`](docs/Select.md) — Dropdown list
+    - [`SimpleChart.php`](docs/SimpleChart.md) — Simple charts: bar, line, pie
+    - [`Span.php`](docs/Span.md) — Inline container
+    - [`Tabs.php`](docs/Tabs.md) — Tabs for section switching
+    - [`Video.php`](docs/Video.md) — Video embedding (local or web)
+  - `JS/` — Client-side part
+    - [`lts.js`](docs/lts.js.md) — Client core
+    - `Form.js`, `Events.js`, `DataTable.js`...
+  - `CSS/` — Predefined styles
+  - `examples/` — Project examples
 
 ## Object-Oriented Approach
 
