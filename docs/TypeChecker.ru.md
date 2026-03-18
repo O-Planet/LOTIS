@@ -1,3 +1,5 @@
+[English](TypeChecker.md) | [Русский](TypeChecker.ru.md)
+
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
 # Трейт TypeChecker
