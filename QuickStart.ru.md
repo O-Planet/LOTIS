@@ -16,7 +16,7 @@ mkdir newlotis && cd newlotis
   - `newlotis/`
     - [`lotis.php`](docs/lotis.ru.md) — Точка входа
     - `LTS/` — Ядро
-      - [`DataView.php`](docs/DataView.ru.md) — Главная форма
+      - [`DataView.php`](docs/DataView.ru.md) — Главная форма: единый интерфейс для работы с документами «шапка + табличные части»
       - [`DataTable.php`](docs/DataTable.ru.md) — Таблицы с сортировкой и отбором
       - [`FilterForm.php`](docs/FilterForm.ru.md) — Форма фильтрации таблиц
       - [`Stock.php`](docs/Stock.ru.md) — Централизованный учёт
@@ -35,6 +35,7 @@ mkdir newlotis && cd newlotis
       - [`MySqlField.php`](docs/MySqlField.ru.md) — Представление поля таблицы
       - [`MySqlTable.php`](docs/MySqlTable.ru.md) — Работа с таблицей
       - [`QueryBuilder.php`](docs/QueryBuilder.ru.md) — Построитель SQL-запросов
+      - [`MultiTable.php`](docs/MySql.ru.md) — Привязка подчиненных таблиц к главной
       - [`Button.php`](docs/Button.ru.md) — Кнопка с действиями
       - [`Cells.php`](docs/Cells.ru.md) — Сетка элементов
       - [`Columns.php`](docs/Columns.ru.md) — Гибкая колоночная вёрстка
