@@ -88,7 +88,7 @@ LTS::Space()->build($div);
    });
    $loginform->event('login',
    <<<JS
-       if(result) alert('Привет!'); 
+       if(result) alert('Привет!'); else console.log('Иди на ...');
    JS
    );
    ```
