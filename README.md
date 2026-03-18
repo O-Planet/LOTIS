@@ -14,7 +14,7 @@ You build applications like desktop development, using OOP principles without be
 ## Minimal Working Example
 ```php
 include_once 'newlotis/lotis.php';
-$div = LTS::Div('main')->capt("Hello from LOTIS!");
+$div = LTS::Div()->capt("Hello from LOTIS!");
 LTS::Space()->build($div);
 ```
 
