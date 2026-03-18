@@ -1,5 +1,7 @@
 [English](QuickStart.md) | [Русский](QuickStart.ru.md)
 
+[Прочти меня](README.md) 
+
 # LOTIS Framework: Быстрый старт
 
 ## Установка
