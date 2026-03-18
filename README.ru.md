@@ -156,3 +156,20 @@ http://www.o-planet.ru
 Сегодня тот самый день, чтобы начать!
 
 ---
+
+💰 Поддержи проект криптой:
+
+🔹 **Bitcoin (BTC):** `bc1q0f8vwtstaevw542gn7uzvt5j69v75fp5ky927h`
+
+🔹 **Ethereum (ETH):** `0x9843cC2985B2fCc995852fe1956DC799be5967d3`
+
+🔹 **USDT (TRC-20):** `TFGXe8NfNv2KzkDEpuekZ9p91AU8ommjTM`
+
+🔹 **TRX:** `TFGXe8NfNv2KzkDEpuekZ9p91AU8ommjTM`
+
+🔹 **TON:** `UQDt433lyVgotQQW0Hj2VecJqXpXRoyR7spTl0A4idEziO99`
+
+🔹 **Polygon (MATIC):** `0x9843cC2985B2fCc995852fe1956DC799be5967d3`
+
+⚠️ **Внимательно проверяй сеть перед отправкой!**
+
