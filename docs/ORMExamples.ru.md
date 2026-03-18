@@ -1,3 +1,5 @@
+[English](ORMExamples.md) | [Русский](ORMExamples.ru.md)
+
 # ПРИМЕРЫ ИСПОЛЬЗОВАНИЯ LOTIS ORM
 
 ## 1. ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ
