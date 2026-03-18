@@ -115,6 +115,7 @@ LTS::Space()->build($div);
    $loginform->button('close', 'Close')->click(
        <<<JS
            $(loginform).hide();
+           LTS(loginform).mymethod();
        JS
    );
    ```
