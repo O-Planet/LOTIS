@@ -1,5 +1,7 @@
 [English](ORMExamples.md) | [Русский](ORMExamples.ru.md)
 
+🚀 [Quick Start](../QuickStart.md)
+
 # LOTIS ORM USAGE EXAMPLES
 
 ## 1. DATABASE CONNECTION
