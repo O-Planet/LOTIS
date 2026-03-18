@@ -1,4 +1,4 @@
-[English](Accordion.md) | [Русский](Accordion.ru.md)
+[English](Video.md) | [Русский](Video.ru.md)
 
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
