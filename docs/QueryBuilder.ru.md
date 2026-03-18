@@ -1,9 +1,20 @@
+[English](QueryBuilder.md) | [Русский](QueryBuilder.ru.md)
+
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
 # Класс QueryBuilder
 
 ## Назначение
 Класс построения сложных SQL-запросов в ORM фреймворка LOTIS. Предназначен для программной генерации SELECT, UPDATE, DELETE-запросов с поддержкой JOIN, WHERE, GROUP BY, ORDER BY, LIMIT, агрегатных функций, UNION и подзапросов. Позволяет строить запросы через fluent interface без написания сырого SQL, обеспечивает автоматическое экранирование значений, защиту от SQL-инъекций через prepared statements и автоматическое добавление JOIN для связанных таблиц. Класс используется через метод `MySqlTable::query()` или `MySqlTable::all()` и выполняет запрос через владельца MySql.
+
+### Основные возможности
+
+* **Построение запросов** различных типов
+* **Управление условиями** поиска
+* **Работа с JOIN** и объединениями
+* **Агрегатные функции**
+* **Пагинация** и сортировка
+* **Параметризация** запросов
 
 ## Свойства
 
@@ -31,35 +42,83 @@
 
 ## Методы
 
+### Конструктор
+
 | Метод | Параметры | Возвращает | Описание |
 |-------|-----------|------------|----------|
 | **__construct** | `MySqlTable $table`, `MySql $owner` | — | Конструктор класса. Сохраняет ссылки на таблицу и подключение, инициализирует `$get_query` в `false`. Не выполняет запросов — только подготовка к построению. |
-| **getQuery** | — | `$this` | Устанавливает флаг `$get_query` в `true`. Последующие вызовы `all()`, `setall()` будут возвращать SQL-строку вместо выполнения запроса. Поддерживает fluent interface. |
+
+### Определение полей
+
+| Метод | Параметры | Возвращает | Описание |
+|-------|-----------|------------|----------|
 | **select** | `mixed $fields` | `$this` | Устанавливает список полей для выборки. Принимает строку (разделяется по запятой через `\LTS::explodestr()`) или массив. Поля обрабатываются через `processField()`. Поддерживает fluent interface. |
 | **fields** | `mixed $fields` | `$this` | Алиас для `select()`. Устанавливает список полей для выборки. Поддерживает fluent interface. |
-| **join** | `mixed $table`, `string $on`, `string $type = 'INNER'`, `string $alias = null` | `$this` | Добавляет JOIN-условие. `$table` может быть объектом MySqlTable или именем таблицы. `$on` — условие соединения. `$type` — тип JOIN (INNER, LEFT, RIGHT). `$alias` — псевдоним таблицы. Поддерживает fluent interface. |
-| **leftJoin** | `mixed $table`, `string $on`, `string $alias = null` | `$this` | Добавляет LEFT JOIN. Обёртка над `join()` с типом `'LEFT'`. Поддерживает fluent interface. |
-| **rightJoin** | `mixed $table`, `string $on`, `string $alias = null` | `$this` | Добавляет RIGHT JOIN. Обёртка над `join()` с типом `'RIGHT'`. Поддерживает fluent interface. |
-| **with** | `string $relation` | `$this` | Автоматически добавляет LEFT JOIN для связанной таблицы. Находит поле типа `'TABLE'` по имени `$relation`, определяет целевую таблицу и добавляет JOIN по условию `{$this->table->name}.{$relation} = {$alias}.id`. Предотвращает дублирование через `$joinedTables`. Поддерживает fluent interface. |
+
+### Определение условий
+
+| Метод | Параметры | Возвращает | Описание |
+|-------|-----------|------------|----------|
 | **where** | `mixed $conditions`, `string $operator = 'AND'` | `$this` | Добавляет WHERE-условия. Поддерживает: (1) Строку — добавляет как есть в скобках. (2) Массив — перебирает ключи-значения, вызывает `addCondition()`. Специальные ключи: `'WHERE'` — сырое условие, агрегатные функции — игнорируются. Поддерживает fluent interface. |
 | **andWhere** | `mixed $conditions` | `$this` | Добавляет условия с оператором AND. Обёртка над `where($conditions, 'AND')`. Поддерживает fluent interface. |
 | **orWhere** | `mixed $conditions` | `$this` | Добавляет условия с оператором OR. Обёртка над `where($conditions, 'OR')`. Поддерживает fluent interface. |
 | **whereGroup** | `mixed $conditions`, `string $operator = 'AND'` | `$this` | Добавляет группу условий в скобках. Создаёт временный QueryBuilder, заполняет его условиями, оборачивает результат в скобки. Поддерживает callable (функция-колбэк) или массив условий. Поддерживает fluent interface. |
 | **addCondition** | `string $name`, `mixed $value`, `string $operator` | — | Внутренний метод добавления условия. Проверяет суффиксы `:left` (>=) и `:right` (<=) в имени поля. Для `:right` добавляет время `23:59:59` если не указано. Вызывает `addWhereCondition()`. |
-| **whereInSubquery** | `string $field`, `callable $callback` | `$this` | Добавляет условие `field IN (subquery)`. Создаёт подзапрос через `subquery()`, оборачивает в `IN (...)`. Мерджит параметры подзапроса в `$params`. Поддерживает fluent interface. |
-| **whereEqualSubquery** | `string $field`, `callable $callback` | `$this` | Добавляет условие `field = (subquery)`. Создаёт подзапрос через `subquery()`, оборачивает в `= (...)`. Мерджит параметры подзапроса в `$params`. Поддерживает fluent interface. |
-| **subquery** | `callable $callback` | `QueryBuilder` | Создаёт новый QueryBuilder для подзапроса. Вызывает `$callback($sub)` для настройки. Возвращает объект подзапроса для использования в `whereInSubquery()`, `whereEqualSubquery()`. |
+
+### Соединение таблиц
+
+| Метод | Параметры | Возвращает | Описание |
+|-------|-----------|------------|----------|
+| **with** | `string $relation` | `$this` | Автоматически добавляет LEFT JOIN для связанной таблицы. Находит поле типа `'TABLE'` по имени `$relation`, определяет целевую таблицу и добавляет JOIN по условию `{$this->table->name}.{$relation} = {$alias}.id`. Предотвращает дублирование через `$joinedTables`. Поддерживает fluent interface. |
+| **join** | `mixed $table`, `string $on`, `string $type = 'INNER'`, `string $alias = null` | `$this` | Добавляет JOIN-условие. `$table` может быть объектом MySqlTable или именем таблицы. `$on` — условие соединения. `$type` — тип JOIN (INNER, LEFT, RIGHT). `$alias` — псевдоним таблицы. Поддерживает fluent interface. |
+| **leftJoin** | `mixed $table`, `string $on`, `string $alias = null` | `$this` | Добавляет LEFT JOIN. Обёртка над `join()` с типом `'LEFT'`. Поддерживает fluent interface. |
+| **rightJoin** | `mixed $table`, `string $on`, `string $alias = null` | `$this` | Добавляет RIGHT JOIN. Обёртка над `join()` с типом `'RIGHT'`. Поддерживает fluent interface. |
+
+### Порядок, группировка
+
+| Метод | Параметры | Возвращает | Описание |
+|-------|-----------|------------|----------|
 | **orderBy** | `string $fields` | `$this` | Устанавливает ORDER BY. Принимает строку с полями через запятую. Префикс `-` перед полем означает DESC (например, `'-created_at'`). Поля обрабатываются через `processExpression()`. Поддерживает fluent interface. |
 | **groupBy** | `string $fields` | `$this` | Устанавливает GROUP BY. Принимает строку с полями через запятую. Поля обрабатываются через `processExpression()`. Поддерживает fluent interface. |
-| **limit** | `mixed $limit` | `$this` | Устанавливает LIMIT. Принимает число или строку (`"10"`, `"10, 20"`). Сохраняет в `$limit`. Поддерживает fluent interface. |
-| **aggregate** | `string $type`, `string $fields` | `$this` | Добавляет агрегатную функцию. `$type` — имя функции (SUM, COUNT, AVG и др.). `$fields` — поля через запятую. Поддерживает алиасы через `AS` (`SUM(total) AS total_sum`). Для `DISTINCT` генерирует `COUNT(DISTINCT field)`. Поддерживает fluent interface. |
+| **aggregate** | `string $type`, `string $fields` | `$this` | Добавляет агрегатную функцию. `$type` — имя функции (SUM, MIN, MAX, COUNT, DISTINCT, AVG, STD, VARIANCE, GROUP_CONCAT, BIT_AND, BIT_OR, BIT_XOR, JSON_ARRAYAGG). `$fields` — поля через запятую. Поддерживает алиасы через `AS` (`SUM(total) AS total_sum`). Для `DISTINCT` генерирует `COUNT(DISTINCT field)`. Поддерживает fluent interface. |
 | **distinct** | `bool $enable = true` | `$this` | Включает/выключает DISTINCT. Устанавливает `$distinct`. Игнорируется если есть агрегатные функции. Поддерживает fluent interface. |
-| **all** | — | `array/false` | Выполняет SELECT-запрос. Генерирует SQL через `getSQL('SELECT')`, получает параметры через `getParams()`, выполняет через `$owner->prepare()`, извлекает результаты через `$owner->result()`. Если `$get_query === true` — возвращает SQL-строку. Возвращает `false` при пустом результате или ошибке. |
+
+
+### Вложенные запросы
+
+| Метод | Параметры | Возвращает | Описание |
+|-------|-----------|------------|----------|
+| **subquery** | `callable $callback` | `QueryBuilder` | Создаёт новый QueryBuilder для подзапроса. Вызывает `$callback($sub)` для настройки. Возвращает объект подзапроса для использования в `whereInSubquery()`, `whereEqualSubquery()`. |
+| **whereInSubquery** | `string $field`, `callable $callback` | `$this` | Добавляет условие `field IN (subquery)`. Создаёт подзапрос через `subquery()`, оборачивает в `IN (...)`. Мерджит параметры подзапроса в `$params`. Поддерживает fluent interface. |
+| **whereEqualSubquery** | `string $field`, `callable $callback` | `$this` | Добавляет условие `field = (subquery)`. Создаёт подзапрос через `subquery()`, оборачивает в `= (...)`. Мерджит параметры подзапроса в `$params`. Поддерживает fluent interface. |
+
+### Ограничения
+
+| Метод | Параметры | Возвращает | Описание |
+|-------|-----------|------------|----------|
+| **limit** | `mixed $limit` | `$this` | Устанавливает LIMIT. Принимает число или строку (`"10"`, `"10, 20"`). Сохраняет в `$limit`. Поддерживает fluent interface. |
 | **first** | — | `mixed/false` | Возвращает первую запись. Устанавливает `LIMIT 1`, вызывает `all()`, возвращает первый элемент массива или `false`. Удобно для получения одной записи без `get()`. |
+
+### Контроль
+
+| Метод | Параметры | Возвращает | Описание |
+|-------|-----------|------------|----------|
+| **getQuery** | — | `$this` | Устанавливает флаг `$get_query` в `true`. Последующие вызовы `all()`, `setall()` будут возвращать SQL-строку вместо выполнения запроса. Поддерживает fluent interface. |
+
+### Построение запросов
+
+| Метод | Параметры | Возвращает | Описание |
+|-------|-----------|------------|----------|
+| **all** | — | `array/false` | Выполняет SELECT-запрос. Генерирует SQL через `getSQL('SELECT')`, получает параметры через `getParams()`, выполняет через `$owner->prepare()`, извлекает результаты через `$owner->result()`. Если `$get_query === true` — возвращает SQL-строку. Возвращает `false` при пустом результате или ошибке. |
+| **setall** | `array $data` | `bool` | Выполняет UPDATE-запрос. Генерирует SQL через `getUpdateSQL()`, мерджит параметры SET и WHERE, выполняет через `$owner->prepare()`. Если `$get_query === true` — выводит параметры и возвращает SQL. Возвращает `true` при успехе, `false` при ошибке. |
 | **getSQL** | `string $type = 'SELECT'` | `string` | Генерирует SQL-запрос. Поддерживает типы: `'SELECT'`, `'DELETE'`. Формирует: SELECT/DISTINCT/агрегаты/поля, FROM, JOIN, WHERE, GROUP BY, ORDER BY, LIMIT, UNION. Сохраняет в `$str_sql_query`. Возвращает строку SQL. |
 | **getUpdateSQL** | `array $data` | `string` | Генерирует UPDATE-запрос. Формирует: UPDATE, JOIN, SET (с параметрами `?`), WHERE, ORDER BY, LIMIT. Не выполняет запрос — только генерация SQL. Используется методом `setall()`. |
-| **setall** | `array $data` | `bool` | Выполняет UPDATE-запрос. Генерирует SQL через `getUpdateSQL()`, мерджит параметры SET и WHERE, выполняет через `$owner->prepare()`. Если `$get_query === true` — выводит параметры и возвращает SQL. Возвращает `true` при успехе, `false` при ошибке. |
 | **getParams** | — | `array` | Возвращает массив параметров для prepared statement. Используется внешними методами для выполнения запроса. |
+
+### Приватные методы
+
+| Метод | Параметры | Возвращает | Описание |
+|-------|-----------|------------|----------|
 | **addRangeCondition** | `string $field`, `string $from`, `string $to` | — | Приватный метод добавления диапазона. Генерирует условие `field >= ? AND field <= ?`, добавляет два параметра в `$params`. Используется для обработки `day:`, `period:` префиксов. |
 | **processField** | `string $f` | `string` | Приватный метод обработки поля. Проверяет кэш `$processedFields`. Обрабатывает алиасы `AS`. Вызывает `processExpression()` для квалификации имён. Сохраняет результат в кэш. |
 | **processExpression** | `string $expr` | `string` | Приватный метод обработки выражения. Автоматически добавляет JOIN для полей с точкой через `autoJoinForField()`. Добавляет обратные кавычки вокруг имён таблиц и полей. Квалифицирует имена полей через `{$this->table->name}.{$field}`. |
@@ -86,6 +145,26 @@
 | **`period:`** | Диапазон дат | `'created' => 'period:2024-01-01,2024-01-31'` → диапазон между датами |
 | **`:left`** | Суффикс для `>=` | `'date:left' => '2024-01-01'` → `date >= ?` |
 | **`:right`** | Суффикс для `<=` | `'date:right' => '2024-01-31'` → `date <= ?` (автоматически добавляет `23:59:59`) |
+
+## Примеры использования
+
+```php
+// Создание построителя
+$query = new QueryBuilder($table, $db);
+
+// Простой запрос
+$result = $query->select(['id', 'name'])
+    ->where(['active' => true])
+    ->orderBy('name')
+    ->limit(10)
+    ->all();
+
+// Запрос с JOIN
+$result = $query->select(['users.name', 'roles.title'])
+    ->join('roles', 'users.role_id = roles.id')
+    ->where(['users.active' => true])
+    ->all();
+```
 
 ## Примечания
 *   Класс создаётся через `MySqlTable::query()` — не рекомендуется создавать экземпляры напрямую через `new QueryBuilder()`.
