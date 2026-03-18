@@ -586,7 +586,7 @@ $stock->update(
 
 ## ▶️ What's Next?
 
-- Explore [full examples](Examples.ru.md)
+- Explore [full examples](Examples.md)
 - Ask questions in [Telegram](https://t.me/OPlanet)
 - Create your own components and share them!
 
