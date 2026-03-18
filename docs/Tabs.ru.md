@@ -68,7 +68,7 @@
 
 ```php
 // Создание системы вкладок
-$tabs = LTS::Tabs('myTabs');
+$tabs = LTS::Tabs();
 
 // Добавление вкладок
 $tab1 = $tabs->newtab('Вкладка 1');
