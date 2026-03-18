@@ -1,6 +1,6 @@
 [English](QuickStart.md) | [Русский](QuickStart.ru.md)
 
-[Прочти меня](README.md) 
+[Прочти меня](README.ru.md) 
 
 # LOTIS Framework: Быстрый старт
 
@@ -603,4 +603,4 @@ $stock->update(
 
 🔹 **Polygon (MATIC):** `0x9843cC2985B2fCc995852fe1956DC799be5967d3`
 
-⚠️ **Double-check the network before sending!**
+⚠️ **Внимательно проверяй сеть перед отправкой!**
