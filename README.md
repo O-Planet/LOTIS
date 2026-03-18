@@ -67,8 +67,7 @@ LTS::Space()->build($div);
    $loginform = LTS::Form()
        ->text('username', 'Login')
        ->password('password', 'Password')
-       ->button('login', 'Sign In')
-       ->button('close', 'Close');
+       ->button('login', 'Sign In');
    $div->add($loginform);
    ```
 
