@@ -1,3 +1,5 @@
+[English](lotis.php.md) | [Русский](lotis.php.ru.md)
+
 🚀 [Быстрый старт](../QuickStart.ru.md)
 
 # Файл lotis.php
@@ -85,6 +87,20 @@
 | **QueryBuilder** | — | `QueryBuilder` | Создаёт построитель SQL-запросов. |
 | **Vars** | `string $id = ''`, `mixed $parent = null` | `Vars` | Создаёт объект глобальных переменных. |
 | **Video** | `string $id = ''`, `mixed $parent = null` | `Video` | Создаёт объект видео-плеера. |
+
+### Примеры использования
+
+```php
+// Подключение фреймворка LOTIS
+define('UPPER_DIR', dirname(__DIR__) . '/newlotis/');
+include_once UPPER_DIR . 'lotis.php';
+
+// Создание объектов приложения
+$div = LTS::Div()->capt('Привет, мир!');
+
+// Построение приложения
+LTS::Space()->build($div);
+```
 
 ## Примечания
 *   **Сессия:** Вызывает `session_start()` в начале — требуется для работы `Vars` и хранения состояния.
