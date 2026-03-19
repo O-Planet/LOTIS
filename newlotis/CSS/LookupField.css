@@ -1,0 +1,25 @@
+.lookup-field {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+}
+
+.lookup-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.lookup-dropdown .data-table th,
+.lookup-dropdown .data-table td {
+    padding: 8px 12px;
+    font-size: 13px;
+}
