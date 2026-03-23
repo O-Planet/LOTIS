@@ -255,7 +255,7 @@ $myform->onevent('save',
 <<<JS
 function (result) {
     if(result.result) {
-        LTS.signal('DataSaved');
+        LTS(myform).signal('DataSaved');
     }
     return $result;
 }
