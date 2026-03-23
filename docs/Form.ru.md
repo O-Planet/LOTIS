@@ -257,7 +257,7 @@ function (result) {
     if(result.result) {
         LTS(myform).signal('DataSaved');
     }
-    return $result;
+    return result;
 }
 JS
 );
