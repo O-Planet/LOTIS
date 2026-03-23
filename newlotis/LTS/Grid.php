@@ -284,7 +284,7 @@ class Grid extends Div
         $this->compilemethod('on(f)', "ltsGrid.on('{$id}', f); return this", $js);
 
         if(! empty($this->defaultmode))
-            $this->js('ready')->add("LTS({$this->id}).mode('{$this->defaultmode}')");
+            $this->js('ready')->add("LTS.get('{$this->id}').mode('{$this->defaultmode}')");
 
         parent::compile();
     }
