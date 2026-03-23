@@ -508,9 +508,36 @@ class Form extends Element
 		return $buttonid;
 	}
 
+	public function beforeevent($button, $func) {
+		$eventname = $this->eventname($button);
+		if(is_string($func))
+			$this->events->js()->add("before{$eventname}", $func);
+		else
+			$this->events->add("before{$eventname}", $func);
+		return $this;
+	}
+
+	public function checkevent($button, $func) {
+		$eventname = $this->eventname($button);
+		if(is_string($func))
+			$this->events->js()->add("check{$eventname}", $func);
+		else
+			$this->events->add("check{$eventname}", $func);
+		return $this;
+	}
+
+	public function onevent($button, $func) {
+		$eventname = $this->eventname($button);
+		if(is_string($func))
+			$this->events->js()->add("on{$eventname}", $func);
+		else
+			$this->events->add("on{$eventname}", $func);
+		return $this;
+	}
+
 	public function event($button, $func)
 	{
-		$buttonid = is_string($button) ? $button : $button->id;
+		$buttonid = $this->eventname($button);
 		if($func === false || $func === null) {
 			$this->set('clicks', $buttonid, false);
 			$this->events->add($buttonid, false);
