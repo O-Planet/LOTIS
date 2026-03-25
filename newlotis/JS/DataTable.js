@@ -78,8 +78,9 @@ const ltsDataTable =
         if(! norows)
         $.each(dataArray, function(index, dataObject) {
             var $row = $('<tr>');
-            $row.attr('data-id', ++dataid);
-            dataObject['ltsDataId'] = dataid;
+            const rowid = 's' + ++dataid;
+            $row.attr('data-id', rowid);
+            dataObject['ltsDataId'] = rowid;
             $.each(hidden, function(index, property) {
                 if (dataObject.hasOwnProperty(property)) {
                     $row.attr(property, dataObject[property]);
@@ -112,10 +113,11 @@ const ltsDataTable =
         let dataid = this.dataids[id] ? this.dataids[id] : 0;
 
         $.each(dataArray, function (index, dataobj) {
-            dataobj['ltsDataId'] = ++dataid;
+            const rowid = 's' + ++dataid;
+            dataobj['ltsDataId'] = rowid;
             rows.push(dataobj);
             var $row = $('<tr>');
-            $row.attr('data-id', dataid);
+            $row.attr('data-id', rowid);
             $.each(hidden, function(index, property) {
                 if (dataobj.hasOwnProperty(property)) {
                     $row.attr(property, dataobj[property]);
@@ -136,7 +138,7 @@ const ltsDataTable =
         this.dataids[id] = dataid;
     },
 
-    lastdataid : function (id) { return this.dataids[id] ? this.dataids[id] : false; },
+    lastdataid : function (id) { return this.dataids[id] ? 's' + this.dataids[id] : false; },
 
     sort: function (id, name, direction) {
         const $table = $('#' + id);
