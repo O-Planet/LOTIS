@@ -15,7 +15,7 @@ class DataTable extends Element
         parent::__construct($id);
         $this->classname = 'data-table';
         $this->tagname = 'table';
-        $this->norows = true; // не выводить строки таблицы при создании
+        $this->norows = true; 
         $this->out = '';
     }
 
@@ -90,17 +90,13 @@ class DataTable extends Element
     }
 
     public function isArrayOfArraysWithNumericKeys($array) {
-        // Проверяем, является ли $array массивом
         if (!is_array($array)) {
             return false;
         }
     
-        // Проходим по каждому элементу массива
         foreach ($array as $key => $element) {
-            // Проверяем, является ли элемент массивом
             if (!is_object($element) && !is_array($element)) 
                 return false;            
-            // Проверяем, являются ли ключ числовым
             if (!is_int($key)) 
                 return false;            
         }
@@ -108,11 +104,10 @@ class DataTable extends Element
         return true;
     }
 
-    // Привязать открытие формы редактирования к клику по строке таблицы
     public function rowclick($form) {
         $this->method('rowclick(row)', 
 <<<JS
-        const ltsDataId = parseInt(jQuery(row).data('id'));
+        const ltsDataId = jQuery(row).data('id');
         if(jQuery(event.target).closest('.Column_sel').length)
         {
             let selthis = LTS({$this->id}).values({ ltsDataId: ltsDataId })[0].sel;
@@ -142,8 +137,6 @@ JS
         );
         return $this;    
     }
-
-    // ----------
 
     public function compile() 
     {
