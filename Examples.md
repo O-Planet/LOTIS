@@ -2,6 +2,8 @@
 
 🚀 [Quick start in 5 minutes](QuickStart.md) 
 
+📁 [Working Examples](./examples/) — 9 ready-made applications from "Hello World" to a full-featured document
+
 # LOTIS: Code Examples
 
 ## Example 1: Reading a file and displaying content
