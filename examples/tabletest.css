@@ -1,0 +1,234 @@
+/* === ОБЩИЙ СТИЛЬ === */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f9fafb;
+    color: #333;
+    margin: 0;
+    padding: 24px;
+    line-height: 1.5;
+}
+
+/* === GRID WRAPPER — универсальный контейнер сетки === */
+.GridWrapper {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.GridWrapper[data-grid-area="header"] {
+    text-align: center;
+    padding: 16px 0;
+}
+
+.GridWrapper[data-grid-area="buttons"] {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding: 16px;
+}
+
+/* === ЗАГОЛОВОК ВНУТРИ HEADER === */
+.GridWrapper[data-grid-area="header"] h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+/* === КНОПКИ === */
+button {
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: #3a5a8c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.3);
+}
+
+/* === ТАБЛИЦЫ (DataTable) === */
+/* === ТАБЛИЦЫ (DataTable) === */
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin-top: 4px;
+}
+
+/* Заголовок таблицы — тёмный фон */
+.data-table thead {
+    background: #2c3e50; /* Глубокий серо-синий */
+    color: white;
+}
+
+.data-table th {
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #ecf0f1;
+    border-bottom: none;
+}
+
+/* Тело таблицы */
+.data-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+/* Чётные строки — чуть темнее */
+.data-table tbody tr:nth-child(even) {
+    background-color: #f8f9fc;
+}
+
+/* Нечётные строки — светлее */
+.data-table tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+/* Подсветка при наведении */
+.data-table tbody tr:hover {
+    background-color: #e7f0ff !important;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: inset 0 0 0 1px #bdc3c7;
+}
+
+/* Выделенная строка (например, выбранная) */
+.data-table tbody tr.selected {
+    background-color: #d4e6f1 !important;
+    border-left: 4px solid #4a6fa5;
+}
+
+/* === ФОРМА (Form) === */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* === ПОЛЯ ФОРМЫ === */
+label {
+    display: block;
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    background: white;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #4a6fa5;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
+}
+
+/* === УДАЛЕНИЕ СТРОКИ === */
+.ltsRowDelbutton {
+    background: #e03131;
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0;
+}
+
+.ltsRowDelbutton:hover {
+    background: #b02626;
+    transform: scale(1.1);
+}
+
+/* === CELLS / COLUMNS — для автоматической разметки полей формы === */
+.Cells {
+    display: grid;
+    gap: 12px;
+    grid-auto-flow: row;
+}
+
+.Columns {
+    display: grid;
+    gap: 12px;
+    align-items: center;
+}
+
+.Column {
+    display: contents; /* Позволяет контролировать layout через PHP */
+}
+
+/* Группировка кнопок Save/Cancel */
+.Row_save_cancel .Column2 {
+    justify-self: end;
+    display: flex;
+    gap: 8px;
+}
+
+/* === АДАПТИВНОСТЬ === */
+@media (max-width: 768px) {
+    body {
+        padding: 16px;
+    }
+
+    .GridWrapper {
+        border-radius: 8px;
+    }
+
+    .GridWrapper[data-grid-area="buttons"] {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px;
+    }
+
+    button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    form {
+        max-width: 100%;
+        padding: 16px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}

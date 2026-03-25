@@ -1,0 +1,289 @@
+/* === ОБЩИЕ СТИЛИ === */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #eef2f6 100%);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+/* === КНОПКИ === */
+button {
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background: #3a5a8c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.3);
+}
+
+/* === ФОРМЫ === */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="numeric"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    background: white;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="numeric"]:focus {
+    border-color: #4a6fa5;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
+}
+
+input[lookupfield] {
+    width: 100%;
+    padding-right: 32px;
+}
+
+/* === ТАБЛИЦЫ === */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-top: 4px;
+}
+
+.data-table thead {
+    background: #f0f4f8;
+}
+
+.data-table th,
+.data-table td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.data-table th {
+    color: #4a6fa5;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-table tbody tr {
+    transition: background 0.2s;
+}
+
+.data-table tbody tr:hover {
+    background: #f8fbff;
+    cursor: pointer;
+}
+
+.data-table tbody tr.selected {
+    background: #e7f0ff !important;
+    border-left: 4px solid #4a6fa5;
+}
+
+/* === LOOKUP FIELD === */
+.lookup-field {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.lookup-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 300px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    z-index: 1000;
+    overflow-y: auto;
+    display: none;
+    backdrop-filter: blur(8px);
+}
+
+.lookup-field:focus-within .lookup-dropdown {
+    display: block;
+}
+
+.lookup-dropdown table {
+    margin: 0;
+}
+
+/* === DIALOG === */
+.Dialog {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 1px solid rgba(0,0,0,0.1);
+    font-size: 14px;
+    min-width: 300px;
+}
+
+.Dialog p {
+    margin: 0;
+    color: #555;
+    font-size: 15px;
+}
+
+.ui-dialog-titlebar {
+    background: #4a6fa5;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.ui-dialog-buttonpane {
+    text-align: right;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* === GRID WRAPPER (для setmodes) === */
+.GridWrapper {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    padding: 16px;
+    min-height: 60px;
+    transition: all 0.2s ease;
+}
+
+.GridWrapper[data-grid-area="element"] {
+    padding: 24px;
+}
+
+.GridWrapper[data-grid-area="content"] {
+    padding: 0;
+}
+
+/* === CELLS & COLUMNS === */
+.Cells {
+    display: grid;
+    gap: 12px;
+    grid-auto-flow: row;
+}
+
+.Columns {
+    display: grid;
+    gap: 12px;
+    align-items: center;
+}
+
+.Column {
+    display: contents; /* Позволяет контролировать layout через PHP */
+}
+
+.Row_save_close .Column2 {
+    justify-self: end;
+    display: flex;
+    gap: 8px;
+}
+
+/* === FILTER BUTTONS === */
+.filterdelbutton {
+    background: #e03131;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.filterdelbutton:hover {
+    background: #b02626;
+    transform: scale(1.05);
+}
+
+/* === УДАЛЕНИЕ СТРОКИ В ТАБЛИЦЕ === */
+.ltsRowDelbutton {
+    background: #e03131;
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0;
+    font-weight: bold;
+}
+
+.ltsRowDelbutton:hover {
+    background: #b02626;
+    transform: scale(1.1);
+}
+
+/* === АДАПТИВНОСТЬ === */
+@media (max-width: 768px) {
+    body {
+        padding: 8px;
+    }
+
+    .GridWrapper {
+        padding: 12px;
+    }
+
+    .Cells {
+        gap: 8px;
+    }
+
+    .Columns {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .Row_save_close .Column2 {
+        justify-self: stretch;
+        flex-direction: row;
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}

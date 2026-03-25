@@ -1,0 +1,22 @@
+#converter {
+    position: fixed;           /* фиксируем относительно окна */
+    top: 50%;                 /* сдвигаем вниз на 50% высоты окна */
+    left: 50%;                /* сдвигаем вправо на 50% ширины окна */
+    transform: translate(-50%, -50%); /* сдвигаем обратно на половину своих размеров для точного центрирования */
+    
+    width: 300px;
+    height: 200px;
+    background-color: #cccccc;
+    
+    border: 2px solid black;  /* рамка вокруг */
+    padding: 0 20px;          /* горизонтальные отступы от краев */
+    
+    font-size: 24px;
+    box-sizing: border-box;   /* чтобы padding и border учитывались в размерах */
+    
+    display: flex;            /* используем flexbox для вертикального центрирования */
+    flex-direction: column;   /* располагаем элементы вертикально */
+    justify-content: center;  /* вертикальное центрирование содержимого */
+    gap: 10px;                /* отступы между элементами внутри */
+    
+}
