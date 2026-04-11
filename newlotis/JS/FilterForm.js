@@ -1,7 +1,7 @@
 let filterTimeout;
 
 $(document).ready(function() {
-    $(document).on('change', 'form.filterform input.filterfield', function () {
+    $(document).on('change', 'form.filterform input.filterfield, form.filterform select.filterfield', function () {
         clearTimeout(filterTimeout);
         const $form = $(this).closest('form');
         const formId = $form.attr('id');

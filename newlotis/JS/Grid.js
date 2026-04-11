@@ -126,29 +126,28 @@ const ltsGrid = {
     },
 
     _hideWrapper(areaId) {
-        const $wrapper = $(`#${areaId}`);
-        if ($wrapper.length > 0) {
-            const id = areaId.split('_area_')[0]; // Извлекаем id Grid
-            const grid = this.grids[id];
-            if (grid && !grid.wrapperDisplay[areaId]) {
-                const wrapperDisplay = $wrapper.css('display') || 'block';
-                grid.wrapperDisplay[areaId] = wrapperDisplay == 'none' ? 'block' : wrapperDisplay;
-            }
-            $wrapper.css('display', 'none');
+        const wrapper = document.getElementById(areaId);
+        if (!wrapper) return;
+
+        const id = areaId.split('_area_')[0]; 
+        const grid = this.grids[id];
+        if (grid && !grid.wrapperDisplay[areaId]) {
+            const wrapperDisplay = window.getComputedStyle(wrapper).display  || 'block';
+            grid.wrapperDisplay[areaId] = wrapperDisplay === 'none' ? 'block' : wrapperDisplay;
         }
+        wrapper.style.display = 'none';
     },
 
     _showWrapper(areaId) {
-        const $wrapper = $(`#${areaId}`);
-        if ($wrapper.length === 0) return;
+        const wrapper = document.getElementById(areaId);
+        if (!wrapper) return;
 
-        const wrapperDisplay = $wrapper.css('display') || 'block';
-        if(wrapperDisplay == 'none')
-        {
+        const wrapperDisplay = window.getComputedStyle(wrapper).display;
+        if (wrapperDisplay === 'none') {
             const id = areaId.split('_area_')[0];
             const grid = this.grids[id];
             const savedDisplay = grid?.wrapperDisplay[areaId];
-            $wrapper.css('display', savedDisplay || 'block');
+            wrapper.style.display = savedDisplay || 'block';
         }
     },
 

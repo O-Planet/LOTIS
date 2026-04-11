@@ -1,3 +1,213 @@
+class LTSObject {
+    constructor(id) {
+        this.id = id;
+        this.param = {};
+    }
+
+    check(f) { this.checkhuck = f; return this; }
+    before(f) { this.beforehuck = f; return this; }
+    on(f) { this.onhuck = f; return this; }
+    jQuery() { return jQuery ? jQuery('#' + this.id) : false; }
+    listen(name, func) {
+        const id = this.id;
+        const selector = '#' + id;
+
+        const delegatedHandler = (e) => {
+            const target = e.target.closest(selector);
+            if (target && target.id === id) {
+                func.call(LTS.get(id), e, target);
+            }
+        };
+
+        if (!this._eventListeners) 
+            this._eventListeners = new Map();
+
+        this._eventListeners.set(name, { handler: delegatedHandler });
+        document.addEventListener(name, delegatedHandler);
+
+        return this;
+    }
+    off(name) {
+        if (!this._eventListeners || !this._eventListeners.has(name)) 
+            return this;
+        const { handler } = this._eventListeners.get(name);
+        document.removeEventListener(name, handler);
+        this._eventListeners.delete(name);
+        return this;
+    }
+    method(name, func) { this[name] = func; return this; }
+
+    signal(name, handler, sender) {
+        if (handler) {
+            const _name = sender ?
+                (typeof sender === 'object' && sender.id ?
+                    `${sender.id}_${name}` :
+                    `${sender}_${name}`
+                ) :
+                name;
+            LTS.onSignal(_name, this, handler);
+        } else {
+            LTS.signal(this.id + '_' + name);
+        }
+        return this;
+    }
+
+    add(obj) {
+        LTS.addto(this.id, obj);
+        return this;
+    }
+
+    del() {
+        const el = document.getElementById(this.id);
+        if (el) el.remove();
+        return this;
+    }
+
+    css(property, value) {
+        const el = document.getElementById(this.id);
+        if (!el) return this;
+
+        if (value !== undefined) {
+            el.style.setProperty(
+                property.replace(/([A-Z])/g, '-$1').toLowerCase(),
+                value
+            );
+            return this;
+        } else if (typeof property === 'object') {
+            Object.entries(property).forEach(([prop, val]) => {
+                el.style.setProperty(
+                    prop.replace(/([A-Z])/g, '-$1').toLowerCase(),
+                    val
+                );
+            });
+            return this;
+        } else {
+            // Получение значения
+            const computed = window.getComputedStyle(el);
+            const propName = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+            return computed.getPropertyValue(propName);
+        }
+    }
+
+    attr(name, value) {
+        const el = document.getElementById(this.id);
+        if (!el) return this;
+
+        if (value !== undefined) 
+            el.setAttribute(name, value);
+        else if (typeof name === 'string') 
+            return el.getAttribute(name);
+        else if (typeof name === 'object') 
+            for (const [k, v] of Object.entries(name)) 
+                el.setAttribute(k, v);
+
+        return this;
+    }
+
+    removeattr(name) {
+        const el = document.getElementById(this.id);
+        if (el) el.removeAttribute(name);
+        return this;
+    }
+
+    hasclass(className) {
+        const el = document.getElementById(this.id);
+        return el ? el.classList.contains(className) : false;
+    }
+
+    addclass(className) {
+        const el = document.getElementById(this.id);
+        if (el) el.classList.add(...className.split(' '));
+        return this;
+    }
+
+    removeclass(className) {
+        const el = document.getElementById(this.id);
+        if (el) el.classList.remove(...className.split(' '));
+        return this;
+    }
+
+    toggleclass(className) {
+        const el = document.getElementById(this.id);
+        if (el) el.classList.toggle(className);
+        return this;
+    }
+
+    show() {
+        const el = document.getElementById(this.id);
+        if (el) el.style.display = '';
+        return this;
+    }
+
+    hide() {
+        const el = document.getElementById(this.id);
+        if (el) el.style.display = 'none';
+        return this;
+    }
+
+    html(htmlString) {
+        const el = document.getElementById(this.id);
+        if (!el) return this;
+        if (htmlString === undefined) 
+            return el.innerHTML;
+        else
+            el.innerHTML = htmlString;
+        return this;
+    }
+
+    text(textContent) {
+        const el = document.getElementById(this.id);
+        if (!el) return this;
+        if (textContent === undefined) 
+            return el.textContent;
+        else
+            el.textContent = textContent;
+        return this;        
+    }
+
+    val(value) {
+        const el = document.getElementById(this.id);
+        if (!el) return this;
+
+        if (value === undefined) 
+            return el.value;
+        else {
+            if (el.tagName === 'SELECT') {
+                el.value = value;
+                Array.from(el.options).forEach(opt => {
+                    opt.selected = opt.value == value;
+                });
+            } else 
+                el.value = value;
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        return this;
+    }
+
+    focus() {
+        const el = document.getElementById(this.id);
+        if (el) el.focus();
+        return this;
+    }
+
+    blur() {
+        const el = document.getElementById(this.id);
+        if (el) el.blur();
+        return this;
+    }
+
+    disabled(disabled = true) {
+        const el = document.getElementById(this.id);
+        if (el) el.disabled = disabled;
+        return this;
+    }
+
+    enable() {
+        return this.disabled(false);
+    }
+}
+
 const LTS = {
     objects: {},        // Хранилище JS-объектов по ID
     varsstorage: {},    // Глобальные переменные (сохраняются в сессии)
@@ -17,23 +227,31 @@ const LTS = {
     get: function (id) {
         if (id) {
             if (!(id in this.objects))
-                this.objects[id] = { id: id, 
-                    check: function (f) { this.checkhuck = f; return this; },
-                    before: function (f) { this.beforehuck = f; return this; },
-                    on: function (f) { this.onhuck = f; return this; },
-                    jQuery: function () { return jQuery('#' + this.id); },
-                    event: function (name, func) { $(document).on(name, '#' + this.id, func); return this; }, 
-                    method: function (name, func) { this[name] = func; return this; },
-                    signal: function (name, handler) { 
-                        if(handler) 
-                            LTS.onSignal(name, this, handler); 
-                        else 
-                            LTS.signal(this.id + '_' + name); 
-                        return this; }, 
-                    param: {}};
+                this.objects[id] = new LTSObject(id);
             return this.objects[id];
         } 
         return false;
+    },
+
+    addto: function (idContainer, childOrId) {
+        const container = document.getElementById(idContainer);
+        if (!container) {
+            console.error(`LTS.add: Контейнер с id="${idContainer}" не найден`);
+            return;
+        }
+
+        let childEl;
+
+        if (typeof childOrId === 'string') 
+            childEl = document.getElementById(childOrId);
+        else if (typeof childOrId === 'object' && childOrId !== null && childOrId.id) 
+            childEl = document.getElementById(childOrId.id);
+
+        // Если нашли DOM-элемент — добавляем
+        if (childEl) 
+            container.appendChild(childEl);
+        else
+            console.warn(`LTS.add: Не удалось найти элемент для добавления`);
     },
 
     vars: function (name, values) {
