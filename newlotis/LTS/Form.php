@@ -197,25 +197,7 @@ class Form extends Element
 			++$k;
 		}
 
-		// Переписываем childs, добавляя в начало перед самым первым input сформированный cells
-		$newchilds = array();
-		$perv = true;
-		foreach($this->get('childs') as $name => $child)
-		{
-			if($perv && $child->type == 'html' &&
-				($child->tagname == 'input' || 
-				$child->tagname == 'select' || 
-				$child->tagname == 'textarea' || 
-				$child->tagname == 'button' ||
-				$child->hasclass('lookup-field')))
-			{
-				$newchilds[$cells->id] = $cells;
-				$perv = false;
-			}
-			$newchilds[$name] = $child;
-		}
-
-		$this->storage['childs'] = $newchilds;
+		$this->addin(1, $cells);
 
 		return $cells;
 	}

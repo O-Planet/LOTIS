@@ -9,6 +9,16 @@ class CSS extends Quark
         $this->type = 'CSS';
     }
 
+    public function add($name, $value = null) {
+        if($value == null && is_array($name)) {
+            foreach($name as $key => $val)
+                parent::add($key, $val);
+            return $this;
+        }
+        else
+            return parent::add($name, $value);
+    }
+
     public function shine($parent = null)
     {
         $childs = $this->get('childs');

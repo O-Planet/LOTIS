@@ -316,7 +316,7 @@ class QueryBuilder
         if (isset($this->joinedTables[$field])) return;
         if (strpos($field, '.') === false) return;
 
-        [$tableKey, $subField] = explode('.', $field, 2);
+        list($tableKey, $subField) = explode('.', $field, 2);
 
         $fieldObj = $this->table->field($tableKey);
         if (!$fieldObj || $fieldObj->type !== 'TABLE' || !$fieldObj->table) return;
@@ -340,7 +340,7 @@ class QueryBuilder
     private function quoteQualifiedField($field)
     {
         if (strpos($field, '.') !== false) {
-            [$table, $subField] = explode('.', $field, 2);
+            list($table, $subField) = explode('.', $field, 2);
             return "`{$table}`.`{$subField}`";
         }
         return "`{$field}`";
@@ -484,7 +484,7 @@ class QueryBuilder
         foreach (\LTS::explodestr($fields) as $f) {
             $as = '';
             if (strpos($f, ' as ') !== false) {
-                [$col, $alias] = explode(' as ', $f, 2);
+                list($col, $alias) = explode(' as ', $f, 2);
                 $col = trim($col);
                 $alias = trim($alias);
                 $f = $col;

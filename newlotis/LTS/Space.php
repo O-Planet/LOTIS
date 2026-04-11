@@ -160,12 +160,28 @@ class Space extends Element
         $tagname = !empty($el['tagname']) ? $el['tagname'] : 'div';
         $id = !empty($el['id']) ? $el['id'] : '';
         $parent = !empty($el['parent']) ? $el['parent'] : '';
-        $attr = !empty($el['attr']) ? ' ' . $el['attr'] : '';
+        $attr = !empty($el['attr']) && is_array($el['attr']) ? $el['attr'] : null;
         $class = !empty($el['class']) ? ' class="' . htmlspecialchars($el['class']) . '"' : '';
         $caption = !empty($el['caption']) ? $el['caption'] : '';
 
+        $attrStr = '';
+
+        if (!empty($attr)) {
+            foreach ($attr as $name => $val) {
+                // Исключаем class и id — они обрабатываются отдельно
+                if ($name === 'class' || $name === 'id') continue;
+
+                if ($val === '' || $val === true) {
+                    $attrStr .= " {$name}";
+                } elseif ($val !== false) {
+                    $escaped = htmlspecialchars((string)$val, ENT_QUOTES);
+                    $attrStr .= " {$name}=\"{$escaped}\"";
+                }
+            }
+        }
+
         $oper = [
-            'tag' => "<{$tagname} id='{$id}'{$class}{$attr}>",
+            'tag' => "<{$tagname} id='{$id}'{$class}{$attrStr}>",
             'tagname' => $tagname,
             'parent' => $parent,
             'childs' => []

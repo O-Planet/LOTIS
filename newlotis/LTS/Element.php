@@ -40,16 +40,24 @@ class Element extends Quark
     public function css($name = '', $value = null)
     {
         if($value !== null) {
-            $this->css()->add($name, $value);
+            if(is_array($value))
+                $this->css($name)->add($value);
+            else
+                $this->css()->add($name, $value);
+            return $this;
+        }
+
+        if(is_array($name)) {
+            $this->css()->add($name);
             return $this;
         }
         
-        $_name = $name == '' ? "#{$this->id}" : $name;
+        $_name = $name == '' ? "#{$this->id}" : "#{$this->id}{$name}";
 
         $childs = $this->get('childs');
         if($childs !== false)
             foreach($childs as $child)
-                if($child->type =='CSS' && $child->id == $_name)
+                if($child->type == 'CSS' && $child->id == $_name)
                     return $child;
 
         $css = new CSS($_name);
@@ -307,26 +315,20 @@ JS
     public function shine($parent = null)
     {
         $this->set('element', 'type', $this->type);
-        $attr = $this->get('attr');    
-        if($attr !== false && count($attr) > 0)
-        {
-            $strattr = '';
-            foreach($attr as $name => $val)
-            {
-                if ($val === false) 
-                    continue;
-                if ($val === true) 
-                {
-                    $strattr .= " {$name}";
-                    continue;
+        $attrMap = $this->get('attr');
+        if ($attrMap !== false && count($attrMap) > 0) {
+            $attrs = [];
+            foreach ($attrMap as $name => $val) {
+                if ($val === false) continue;
+                if ($val === true) {
+                    $attrs[$name] = ''; 
+                } else {
+                    $attrs[$name] = $val;
                 }
-                $strattr .= " {$name}=\"" . htmlspecialchars((string) $val) . "\"";
-            }            
-            // Убираем лишний пробел в начале, если есть
-            $strattr = ltrim($strattr);            
-            if ($strattr !== '') 
-                $this->set('element', 'attr', $strattr); 
+            }
+            $this->set('element', 'attr', $attrs);
         }
+
         if($this->tagname != '')
             $this->set('element', 'tagname', $this->tagname);
         if($this->id != '')

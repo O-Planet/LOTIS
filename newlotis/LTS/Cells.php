@@ -61,7 +61,7 @@ class Cells extends Div
 			{
             	$row = new Columns();
             	$row->addclass("Row Row{$k}");
-            	$this->add($k, $row);
+            	parent::add($k, $row);
         	}
 
 			if($this->rowscount < $_numb)
