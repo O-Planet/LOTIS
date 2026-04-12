@@ -15,6 +15,10 @@ LOTIS (Low Time Script) is a fast and compact framework for creating web applica
 It focuses on performance and ease of development, reducing manual effort when building interfaces and logic.
 You build applications like desktop development, using OOP principles without being tied to markup.
 
+<div align="center">
+  <img src="VIDEO.gif" alt="LOTIS" width="90%">
+</div>
+
 ## Minimal Working Example
 ```php
 include_once 'newlotis/lotis.php';
