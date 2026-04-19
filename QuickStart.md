@@ -47,7 +47,7 @@ mkdir newlotis && cd newlotis
     - [`DataSync.php`](docs/DataSync.md) — Client-server data synchronization
     - [`Debug.php`](docs/Debug.md) — Debug tools: logging, variable output
     - [`Element.php`](docs/Element.md) — Base class for all UI elements
-    - [`Ether.php`](docs/Ether.md) — Broadcast messaging system (pub/sub)
+    - [`Ether.php`](docs/Ether.md) — Basic interface
     - [`Html.php`](docs/Html.md) — HTML tag handling: label, span, div, etc.
     - [`Lang.php`](docs/Lang.md) — Multi-language support
     - [`LayerSlider.php`](docs/LayerSlider.md) — Interface layer switching (step-by-step forms)
