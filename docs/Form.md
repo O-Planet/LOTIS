@@ -161,7 +161,7 @@ $myform->event($clickbutton,
     alert(result);
 JS
   )
-  ->event($clickbutton, function($values) {
+  ->event($clickbutton, function($args) {
     return 'Hello, ' . $args['username'];
 });
 
