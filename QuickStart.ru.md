@@ -46,7 +46,7 @@ mkdir newlotis && cd newlotis
       - [`DataSync.php`](docs/DataSync.ru.md) — Синхронизация данных
       - [`Debug.php`](docs/Debug.ru.md) — Инструменты отладки
       - [`Element.php`](docs/Element.ru.md) — Базовый класс всех UI-элементов
-      - [`Ether.php`](docs/Ether.ru.md) — Система широковещательных сообщений
+      - [`Ether.php`](docs/Ether.ru.md) — Базовый интерфейс
       - [`Html.php`](docs/Html.ru.md) — Работа с HTML-тегами
       - [`Lang.php`](docs/Lang.ru.md) — Поддержка мультиязычности
       - [`LayerSlider.php`](docs/LayerSlider.ru.md) — Переключение слоёв интерфейса
