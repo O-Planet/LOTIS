@@ -53,7 +53,6 @@ mkdir newlotis && cd newlotis
       - [`Logger.php`](docs/Logger.ru.md) — Логирование действий и ошибок
       - [`ProgressBar.php`](docs/ProgressBar.ru.md) — Визуальный прогресс
       - [`Quark.php`](docs/Quark.ru.md) — Мини-реализация объектной модели
-      - [`Select.php`](docs/Select.ru.md) — Выпадающий список
       - [`SimpleChart.php`](docs/SimpleChart.ru.md) — Простые графики
       - [`Span.php`](docs/Span.ru.md) — Inline-контейнер
       - [`Tabs.php`](docs/Tabs.ru.md) — Вкладки
