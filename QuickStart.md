@@ -54,7 +54,6 @@ mkdir newlotis && cd newlotis
     - [`Logger.php`](docs/Logger.md) — Action and error logging
     - [`ProgressBar.php`](docs/ProgressBar.md) — Visual task progress indicator
     - [`Quark.php`](docs/Quark.md) — Mini object model: events, subscriptions, calls
-    - [`Select.php`](docs/Select.md) — Dropdown list
     - [`SimpleChart.php`](docs/SimpleChart.md) — Simple charts: bar, line, pie
     - [`Span.php`](docs/Span.md) — Inline container
     - [`Tabs.php`](docs/Tabs.md) — Tabs for section switching
