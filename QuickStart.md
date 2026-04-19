@@ -43,7 +43,7 @@ mkdir newlotis && cd newlotis
     - [`Cells.php`](docs/Cells.md) — Element grid: row and column layout
     - [`Columns.php`](docs/Columns.md) — Flexible column layout (CSS grid analog)
     - [`Accordion.php`](docs/Accordion.md) — Expandable blocks for form grouping
-    - [`Construct.php`](docs/Construct.md) — Dynamic UI structure creation
+    - [`Construct.php`](docs/Construct.md) — First base class
     - [`DataSync.php`](docs/DataSync.md) — Client-server data synchronization
     - [`Debug.php`](docs/Debug.md) — Debug tools: logging, variable output
     - [`Element.php`](docs/Element.md) — Base class for all UI elements
