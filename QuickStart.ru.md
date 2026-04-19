@@ -42,7 +42,7 @@ mkdir newlotis && cd newlotis
       - [`Cells.php`](docs/Cells.ru.md) — Сетка элементов
       - [`Columns.php`](docs/Columns.ru.md) — Гибкая колоночная вёрстка
       - [`Accordion.php`](docs/Accordion.ru.md) — Раскрывающиеся блоки
-      - [`Construct.php`](docs/Construct.ru.md) — Динамическое создание UI-структур
+      - [`Construct.php`](docs/Construct.ru.md) — Первый базовый класс
       - [`DataSync.php`](docs/DataSync.ru.md) — Синхронизация данных
       - [`Debug.php`](docs/Debug.ru.md) — Инструменты отладки
       - [`Element.php`](docs/Element.ru.md) — Базовый класс всех UI-элементов
